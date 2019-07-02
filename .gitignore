@@ -1,0 +1,3 @@
+*.sqlite
+composit_class/*.sqlite
+composit_class/__pycache__/*.pyc
