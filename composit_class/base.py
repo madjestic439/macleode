@@ -19,8 +19,8 @@ class Base:
         self.nb_doublon = 0
 
     def creation(self):
-        """database creation"""
-        print('datatable creation...')
+        """creating database"""
+        print('creating database...')
         self.curs.execute("CREATE TABLE IF NOT EXISTS {}({} INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, {} TEXT UNIQUE, {} TEXT, {} TEXT)".format(self.tb_link, self.tb_link_colomn[0], self.tb_link_colomn[1], self.tb_link_colomn[2], self.tb_link_colomn[3]))
         self.curs.execute("CREATE TABLE IF NOT EXISTS {}({} INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, {} TEXT UNIQUE, {} INTEGER)".format(self.tb_c, self.tb_c_colomn[0], self.tb_c_colomn[1], self.tb_c_colomn[2]))
         self.conn.commit()
@@ -43,14 +43,14 @@ class Base:
         return self.curs.fetchall()
 
     def analyse(self):
-        """lance the analyse's programm: detect the same files"""
+        """run the analyse: detect same files"""
         print('Analyzing all files...')
         links = self.get_all_link()
         for link in links:
             self.the_one(link)
 
     def the_one(self, link):
-        """get the same files and save it"""
+        """get same files and save it"""
         self.curs.execute("SELECT * FROM {} WHERE {} = '{}' AND {} = '{}' ORDER BY {}".format(self.tb_link, self.tb_link_colomn[2], link[2], self.tb_link_colomn[3], link[3], self.tb_link_colomn[0]))
         data_c = self.curs.fetchall()
         if len(data_c) > 1 :
