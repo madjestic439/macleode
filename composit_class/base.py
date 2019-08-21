@@ -88,6 +88,12 @@ class Base:
                 os.remove(fl)
         print('datatable deleted')
 
+    def close_db(self):
+        """close database"""
+        print('closing current datatable...')
+        self.conn.close()
+        print('current datatable ('+self.f_base+') closed')
+
 if __name__ == "__main__":
     all = [('test1', '134', 'ext1'),('test2', '134', 'ext2'),('test1', '134', 'ext1'),('test3', '134', 'ext3'),('test4', '134', 'ext4'),('test1', '134', 'ext1'),('test2', '134', 'ext2'),('test5', '134', 'ext5')]
     base = Base()

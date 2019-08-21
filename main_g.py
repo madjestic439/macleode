@@ -28,6 +28,8 @@ class Ihm:
         self.bt_select_dir.pack(side="top", fill="x", pady=5, padx=10)
         self.bt_del_url = Button(self.fr_input_bts, text='Delete', command=self.del_url, state=DISABLED)
         self.bt_del_url.pack(side="top", fill="x", pady=5, padx=10)
+        self.bt_reinit = Button(self.fr_input_bts, text='Reset', command=self.reinit)
+        self.bt_reinit.pack(side="top", fill="x", pady=5, padx=10)
         self.fr_input_lst = Frame(self.fr_input, borderwidth=2, relief='groove')
         self.list_url = Listbox(self.fr_input_lst, width=150)
         self.list_url.pack(side="top", fill="both")
@@ -127,6 +129,21 @@ class Ihm:
             self.update_list_crp()
         else:
             showwarning('Delete', 'No file to delete.')
+
+    def reinit(self):
+        self.my_moteur.terminated()
+        self.my_moteur = composit_class.moteur.Moteur()
+        self.update_list_url()
+        self.list_crp.delete(0, self.list_crp.size())
+        self.bt_del_url.config(state=DISABLED)
+        self.bt_go.config(state=DISABLED)
+        self.bt_del_file.config(state=DISABLED)
+        self.bt_next.config(state=DISABLED)
+        self.bt_select_dir.config(state=NORMAL)
+        self.lbl_nb_file.config(text="")
+        self.lbl_nb_crp.config(text="")
+        self.lbl_nb_file_del.config(text="")
+        self.current_crp=[]
 
     def run(self):
         self.main_fen.mainloop()

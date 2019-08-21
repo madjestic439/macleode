@@ -76,3 +76,7 @@ class Moteur:
         if rm :
             self.nb_suppr += 1
             return True
+
+    def terminated(self):
+        """terminate app"""
+        self.base.close_db()
