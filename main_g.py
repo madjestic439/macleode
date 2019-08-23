@@ -87,11 +87,14 @@ class Ihm:
             self.bt_go.config(state=NORMAL)
 
     def go(self):
-        self.bt_go.config(state=DISABLED)
+        self.bt_go.config(state=DISABLED, text='Please wait...')
         self.bt_del_url.config(state=DISABLED)
         self.bt_select_dir.config(state=DISABLED)
+        self.bt_reinit.config(state=DISABLED)
         self.my_moteur.go()
         self.lbl_nb_file.config(text="Scanned files: {}".format(self.my_moteur.nb_f))
+        self.bt_go.config(text='')
+        self.bt_reinit.config(state=NORMAL)
         if self.my_moteur.nb_c:
             self.next()
         else:
@@ -136,7 +139,7 @@ class Ihm:
         self.update_list_url()
         self.list_crp.delete(0, self.list_crp.size())
         self.bt_del_url.config(state=DISABLED)
-        self.bt_go.config(state=DISABLED)
+        self.bt_go.config(state=DISABLED, text='Go...')
         self.bt_del_file.config(state=DISABLED)
         self.bt_next.config(state=DISABLED)
         self.bt_select_dir.config(state=NORMAL)
